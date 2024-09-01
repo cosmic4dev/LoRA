@@ -1,0 +1,17 @@
+# LoRA: Low-Rank Adaptation of Large Language Models
+
+The **Low-Rank Adaptation (LoRA)** method is designed to adapt large pre-trained language models to specific downstream tasks efficiently, without fully fine-tuning all model parameters. This approach addresses several challenges associated with large-scale models like GPT-3, which has 175 billion parameters, making it prohibitively expensive to fine-tune and deploy multiple instances for different tasks.
+
+### Key Features of LoRA
+
+1. **Parameter Efficiency**: LoRA introduces a method where the pre-trained model's weights are frozen, and instead, low-rank decomposition matrices are trained to adapt the model for new tasks. This drastically reduces the number of trainable parameters—by up to 10,000 times compared to full fine-tuning.
+2. **No Additional Inference Latency**: Unlike other methods such as adapters, which can add latency during inference by adding additional layers, LoRA integrates the learned low-rank matrices with the original weights. Thus, the model maintains its original speed during deployment.
+3. **Scalability and Flexibility**: LoRA can be easily scaled to different tasks by simply swapping the low-rank matrices corresponding to different tasks. This significantly reduces storage requirements and allows for quick task switching.
+4. **Performance**: LoRA has been shown to perform on par or even better than full fine-tuning and other parameter-efficient methods across several benchmarks (e.g., RoBERTa, DeBERTa, GPT-2, and GPT-3) while using far fewer parameters.
+5. **Empirical Insights**: The research provides empirical evidence that the changes in the model's weights during adaptation have a low "intrinsic rank," meaning a small number of parameters is sufficient to capture the required task-specific adjustments.
+
+### Practical Benefits
+
+- **Reduced Hardware Requirements**: LoRA reduces GPU memory requirements by 3 times during training and does not require maintaining optimizer states for the frozen parameters.
+- **Higher Training Throughput**: The method allows for faster training by avoiding computation on the full parameter set.
+- **Task-Specific Models**: LoRA allows the creation of multiple task-specific models without the need for full fine-tuning each time, saving resources and enabling efficient deployment.
