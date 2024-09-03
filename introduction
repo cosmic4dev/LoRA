@@ -15,3 +15,15 @@ The **Low-Rank Adaptation (LoRA)** method is designed to adapt large pre-trained
 - **Reduced Hardware Requirements**: LoRA reduces GPU memory requirements by 3 times during training and does not require maintaining optimizer states for the frozen parameters.
 - **Higher Training Throughput**: The method allows for faster training by avoiding computation on the full parameter set.
 - **Task-Specific Models**: LoRA allows the creation of multiple task-specific models without the need for full fine-tuning each time, saving resources and enabling efficient deployment.
+
+
+## focus on language modeling
+
+### 1. conditional language modeling objective
+
+$$
+\max_{\Phi} \sum_{(x,y) \in \mathcal{Z}} \sum_{t=1}^{|y|} \log \left( P_{\Phi} \left( y_t \mid x, y_{<t} \right) \right)
+$$
+
+### 2. Using LoRA for fine-tune
+\max_{\Theta} \sum_{(x,y) \in \mathcal{Z}} \sum_{t=1}^{|y|} \log \left( p_{\Phi_0 + \Delta \Phi(\Theta)} \left( y_t \mid x, y_{<t} \right) \right)
